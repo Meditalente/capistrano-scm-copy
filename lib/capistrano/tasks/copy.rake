@@ -5,7 +5,7 @@ namespace :copy do
   desc "Archive files to #{archive_name}"
   task :create_archive do |t|
     include_dir  = fetch(:include_dir, ".")
-    exclude_dir  = Array(fetch(:exclude_dir, %w(.git log tmp)))
+    exclude_dir  = Array(fetch(:exclude_dir, [])) + %W(#{archive_name} .git log tmp)
 
     exclude_args = exclude_dir.map { |dir| "--exclude '#{dir}'"}
 
