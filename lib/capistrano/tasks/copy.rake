@@ -52,12 +52,9 @@ namespace :copy do
   task create_release: :deploy
   task :check
   task :set_current_revision do |_t|
-    local_path = fetch(:local_path)
-    within local_path do
-      run_locally do
-        revision = capture(:git, "rev-list --max-count=1 --abbrev-commit #{fetch(:branch)}").strip
-        set :current_revision, revision
-      end
+    run_locally do
+      revision = capture(:git, "rev-list --max-count=1 --abbrev-commit #{fetch(:branch)}").strip
+      set :current_revision, revision
     end
   end
 end
